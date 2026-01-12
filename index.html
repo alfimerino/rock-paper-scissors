@@ -20,12 +20,6 @@
     }
 
     function getHumanChoice() {
-
-        let validChoice = false
-        // while (!validChoice) {
-        //     let choice = prompt("Enter 1: Rock, 2: Paper, 3: Scissors", 1)
-
-        // }
         let choice = prompt("Enter 1: Rock, 2: Paper, 3: Scissors", 1)
 
         if (choice == 1) {
@@ -37,23 +31,54 @@
         }
     }
 
-    function playRound(humanChoice, computerChoice) {
-        console.log("Entered here")
+    function playGame() {
+        let humanScore = 0
+        let computerScore = 0
+
+        let humanChoice = ""
+        let computerChoice = ""
+
+        let roundWinner = ""
+
+        for (let i = 0; i <= 5; i += 1) {
+        humanChoice = getHumanChoice()
+        computerChoice = getComputerChoice()
+        roundWinner = playRound(humanChoice, computerChoice)
+
+        if (roundWinner == "Human") {
+            humanScore++
+        } else if (roundWinner == "Computer") {
+            computerScore++
+        }
+        console.log("Human: " + humanScore + " Computer: " + computerScore)
+    }
+        endGame(humanScore, computerScore)
     }
 
-    let humanScore = 0
-    let computerScore = 0
+    function endGame(humanScore, computerScore) {
+        if(humanScore>computerScore) {
+            console.log("Human wins")
+        } else if (computerScore>humanScore) {
+            console.log("Computer wins")
+        } else {
+            console.log("Tie Game")
+        }
+    }
 
-    let humanChoice = ""
-    let computerChoice = ""
-
-    // Your JavaScript goes here!
-
-    for (let i = 0; i <= 5; i += 1) {
-       computerChoice = console.log(getComputerChoice())
-       humanChoice = console.log(getHumanChoice())
-        playRound(humanChoice, computerChoice)
-}
+    function playRound(humanChoice, computerChoice) {
+        if (humanChoice == "Rock" && computerChoice == "Paper") {
+            return "Human"
+        } else if (humanChoice == "Scissors" && computerChoice == "Paper") {
+            return "Human"
+        } else if (humanChoice == "Paper" && computerChoice == "Rock") {
+            return "Human"
+        } else if (humanChoice == computerChoice) {
+            return " "
+        } else {
+            return "Computer"
+        }
+    }
+    playGame()
   </script>
 </body>
 </html>
