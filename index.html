@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     <script>
+    function getComputerChoice() {
+        let numChoice = Math.random()
+        if (numChoice < 0.25) {
+            return "Rock"
+        } else if (numChoice < .75) {
+            return "Paper"
+        } else {
+            return "Scissors"
+        }
+
+    }
+
+    function getHumanChoice() {
+
+        let validChoice = false
+        // while (!validChoice) {
+        //     let choice = prompt("Enter 1: Rock, 2: Paper, 3: Scissors", 1)
+
+        // }
+        let choice = prompt("Enter 1: Rock, 2: Paper, 3: Scissors", 1)
+
+        if (choice == 1) {
+            return "Rock"
+        } else if (choice == 2) {
+            return "Paper"
+        } else if (choice == 3) {
+            return "Scissors"
+        }
+    }
+
+    function playRound(humanChoice, computerChoice) {
+        console.log("Entered here")
+    }
+
+    let humanScore = 0
+    let computerScore = 0
+
+    let humanChoice = ""
+    let computerChoice = ""
+
+    // Your JavaScript goes here!
+
+    for (let i = 0; i <= 5; i += 1) {
+       computerChoice = console.log(getComputerChoice())
+       humanChoice = console.log(getHumanChoice())
+        playRound(humanChoice, computerChoice)
+}
+  </script>
+</body>
+</html>
