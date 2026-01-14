@@ -1,7 +1,9 @@
 // 1. SELECTORS
 const container = document.querySelector(".container");
-const humanScore = document.querySelector(".humanScore")
-const computerScore = document.querySelector(".computerScore")
+const humanScoreElement = document.querySelector(".humanScore")
+const computerScoreElement = document.querySelector(".computerScore")
+const computerChoiceElement = document.querySelector(".computerChoice")
+const humanChoiceElement = document.querySelector(".humanChoice")
 
 // 2. LOGIC (The Function)
 function getComputerChoice() {
@@ -27,38 +29,40 @@ function getHumanChoice() {
     }
 }
 
-function playGame() {
-    let humanScore = 0;
-    let computerScore = 0;
-
+function playGame(event) {
     let humanChoice = "";
     let computerChoice = "";
 
-    let roundWinner = "";
-
-    // for (let i = 0; i <= 5; i += 1) {
-    humanChoice = getHumanChoice();
+    humanChoice = event.target.textContent
     computerChoice = getComputerChoice();
+
+    humanChoiceElement.textContent = humanChoice
+    computerChoiceElement.textContent = computerChoice
     roundWinner = playRound(humanChoice, computerChoice);
 
     if (roundWinner == "Human") {
-        humanScore++;
+        humanScoreElement.textContent= Number(humanScoreElement.textContent) + 1
+
     } else if (roundWinner == "Computer") {
-        computerScore++;
+        computerScoreElement.textContent= Number(computerScoreElement.textContent) + 1
     }
-    console.log("Human: " + humanScore + " Computer: " + computerScore);
-    // }
-    endGame(humanScore, computerScore);
+
+    if (computerScoreElement.textContent == "5" || humanScoreElement.textContent == "5") {
+        endGame(Number(humanScoreElement.textContent), Number(computerScoreElement.textContent))
+    }
 }
 
 function endGame(humanScore, computerScore) {
+
     if (humanScore > computerScore) {
-        console.log("Human wins");
+        alert("Human wins");
     } else if (computerScore > humanScore) {
-        console.log("Computer wins");
+        alert("Computer wins");
     } else {
         console.log("Tie Game");
     }
+    humanScoreElement.textContent = ""
+    computerScoreElement.textContent = ""
 }
 
 function playRound(humanChoice, computerChoice) {
@@ -87,9 +91,11 @@ scissorsButton.textContent = "Scissors";
 // 4. INTERACTION (Connecting the function to the button)
 
 function testbutton(event) {
-    humanScore.textContent= event.target.textContent
+    humanScoreElement.textContent= Number(humanScoreElement.textContent) + 1
 }
-rockButton.addEventListener("click", testbutton)
+rockButton.addEventListener("click", playGame)
+paperButton.addEventListener("click", playGame)
+scissorsButton.addEventListener("click", playGame)
 
 // 5. PLACEMENT
 container.append(rockButton, paperButton, scissorsButton);
